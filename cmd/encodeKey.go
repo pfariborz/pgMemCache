@@ -3,13 +3,14 @@ package cmd
 import (
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 )
 
 var globalHash = map[string]map[string]string{}
 
-func storeKeyPair() {
+func storeKeyPair(key, value string) {
 	entry := make(map[string]string)
-	entry["key"] = "value"
+	entry[key] = value
 
 	for k, v := range entry {
 		sha256 := sha256.Sum256([]byte(entry[k]))
@@ -18,5 +19,10 @@ func storeKeyPair() {
 
 		globalHash[hex] = map[string]string{}
 		globalHash[hex][k] = v
+	}
+
+	for k, v := range entry {
+		fmt.Println(k)
+		fmt.Println(v)
 	}
 }
